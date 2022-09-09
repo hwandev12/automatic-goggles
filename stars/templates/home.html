@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+.checked {
+    color: orange;
+}
+.btn {
+	background-color: inherit !important;
+	border: 0 !important;
+}
+</style>
+</style>
+
+<body>
+    {%  if rate %}
+    <img src="{{ rate.image.url }}" alt="" width="300">
+    <a href="{% url 'blog:home' %}"><button>Next</button></a>
+    <form class="rate-form" method="POST">
+    	{% csrf_token %}
+	    <button type="submit" class="fa fa-star fa-3x btn checked" id="first"></button>
+	    <button type="submit" class="fa fa-star fa-3x btn checked" id="second"></button>
+	    <button type="submit" class="fa fa-star fa-3x btn checked" id="third"></button>
+	    <button type="submit" class="fa fa-star fa-3x btn" id="fourth"></button>
+	    <button type="submit" class="fa fa-star fa-3x btn" id="fifth"></button>
+    </form>
+    <div id="confirm-box"></div>
+    {% else %}
+    	<h1>There is no image to rate</h1>
+    {% endif %}
+
+
+
+    <script src="{% static 'main.js' %}"></script>
+</body>
+
+</html>
