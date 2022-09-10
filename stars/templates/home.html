@@ -38,6 +38,8 @@
     {% else %}
     <h1>There is no image to rate</h1>
     <h1>{{ avg_rate.score__avg }}</h1>
+    <h1>{{ avg_rate.score__min }}</h1>
+    <h1>{{ avg_rate.score__max }}</h1>
     {% endif %}
     <script src="{% static 'main.js' %}"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
