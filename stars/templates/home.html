@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <style>
-.checked {
+    .checked {
     color: orange;
 }
-.btn {
+.btns {
 	background-color: inherit !important;
 	border: 0 !important;
 }
@@ -20,25 +21,26 @@
 </style>
 
 <body>
-    {%  if rate %}
+    {% if rate %}
     <img src="{{ rate.image.url }}" alt="" width="300">
-    <a href="{% url 'blog:home' %}"><button>Next</button></a>
-    <form class="rate-form" method="POST">
-    	{% csrf_token %}
-	    <button type="submit" class="fa fa-star fa-3x btn checked" id="first"></button>
-	    <button type="submit" class="fa fa-star fa-3x btn checked" id="second"></button>
-	    <button type="submit" class="fa fa-star fa-3x btn checked" id="third"></button>
-	    <button type="submit" class="fa fa-star fa-3x btn" id="fourth"></button>
-	    <button type="submit" class="fa fa-star fa-3x btn" id="fifth"></button>
+    <a href="{% url 'blog:home' %}"><button class="btn btn-primary">Next</button></a>
+    <form class="rate-form" method="POST" id="{{ rate.id }}">
+        {% csrf_token %}
+        <button type="submit" class="fa fa-star fa-3x btns" id="first"></button>
+        <button type="submit" class="fa fa-star fa-3x btns" id="second"></button>
+        <button type="submit" class="fa fa-star fa-3x btns" id="third"></button>
+        <button type="submit" class="fa fa-star fa-3x btns" id="fourth"></button>
+        <button type="submit" class="fa fa-star fa-3x btns" id="fifth"></button>
+        <br>
+        <div id="confirm-box"></div>
     </form>
-    <div id="confirm-box"></div>
+    
     {% else %}
-    	<h1>There is no image to rate</h1>
+    <h1>There is no image to rate</h1>
+    <h1>{{ avg_rate.score__avg }}</h1>
     {% endif %}
-
-
-
     <script src="{% static 'main.js' %}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 
 </html>

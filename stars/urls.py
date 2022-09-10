@@ -4,5 +4,6 @@ from .views import *
 app_name = 'blog'
 
 urlpatterns = [
-    path('', home, name='home')
+    path('', home, name='home'),
+    path('rate-image/', rate_image, name='rate')
 ]

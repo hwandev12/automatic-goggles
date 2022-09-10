@@ -1,10 +1,24 @@
 from django.shortcuts import render
 from .forms import *
 from .models import *
+from django.http import JsonResponse
+from django.db.models import Avg
 
 def home(request):
-	rate = Rating.objects.filter(score=3).order_by("?").first()
+	rate = Rating.objects.filter(score=0).order_by("?").first()
+	avg_rate = Rating.objects.aggregate(Avg("score"))
 	context = {
-		"rate": rate
+		"rate": rate,
+		"avg_rate": avg_rate
 	}
 	return render(request, 'home.html', context)
+
+def rate_image(request):
+	if request.method == "POST":
+		el_id = request.POST.get("el_id")
+		val = request.POST.get("val")
+		rate = Rating.objects.get(id=el_id)
+		rate.score = val
+		rate.save()
+		return JsonResponse({"success": "true", "score": val}, safe=False)
+	return JsonResponse({"success": "false"})
